@@ -47,6 +47,6 @@ __pycache__
 src/dk
 datas
 env
-
+src/bak*
 
 
