@@ -1,0 +1,3 @@
+#!/bin/bash
+
+for i in `ls *.png`; do imgcat $i; echo $i; done;

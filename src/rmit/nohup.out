@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "cut100-jig.py", line 5, in <module>
+    from src.utils.JigClient import *
+  File "/home/zhangwm/zhangweimin/Codelibrary/TREC/src/utils/JigClient.py", line 126
+    topic_id.append(new_list[1]])
+                               ^
+SyntaxError: invalid syntax
