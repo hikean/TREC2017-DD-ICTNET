@@ -44,7 +44,6 @@ __pycache__
 .svn
 .vscode
 .gif
-src/dk
 datas
 env
 src/bak*
