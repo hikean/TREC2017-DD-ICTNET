@@ -1,0 +1,10 @@
+*.log
+*.pyc
+*.tgz
+*.tar
+*.rar
+*.gz
+*.txt
+*.xml
+*.json
+
