@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "import_ebola2.py", line 109, in <module>
+    main()
+  File "import_ebola2.py", line 102, in main
+    thread_count = int(sys.argv[2])
+IndexError: list index out of range
