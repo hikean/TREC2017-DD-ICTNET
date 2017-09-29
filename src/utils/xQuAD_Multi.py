@@ -73,9 +73,9 @@ def merge_doc_score( doc_list_a, doc_list_b, ws):
 
             d = dic_a[k][0]
         if dic_b.has_key(k):
-            scores[0] += ws[0] * 1.0 * dic_b[k][1]
-            scores[1] += ws[0] * 1.0 * dic_b[k][2]
-            scores[2] += ws[0] * 1.0 * dic_b[k][3]
+            scores[0] += ws[1] * 1.0 * dic_b[k][1]
+            scores[1] += ws[1] * 1.0 * dic_b[k][2]
+            scores[2] += ws[1] * 1.0 * dic_b[k][3]
             d = dic_b[k][0]
 
         ret.append( [d] + scores )
