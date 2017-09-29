@@ -14,6 +14,7 @@ from os import listdir
 from os.path import exists, isfile, isdir
 from elasticsearch import Elasticsearch
 
+import multiprocess as mp
 
 ELASTICS_HOSTS = ['http://localhost:9200/']
 FILE_TEMPLATE = "../../dk/data/clean_ebola_json/{}.json"
@@ -24,10 +25,11 @@ def get_title(html):
         title = html["content_metas_title"].strip()
         if len(title) > 3:
             return title
-    except: pass
+    except Exception:
+        pass
     try:
         title = html.get("content_title", "-").strip()
-    except:
+    except Exception:
         title = "-"
     for tag in ["content_h2", "content_h3", "content_h1"]:
         if len(html.get(tag, [])) == 1 and title == "":
@@ -52,13 +54,13 @@ def deal_json(file_name):
     html = body
     try:
         body["description"] = html["content_metas_description"]
-    except:
+    except Exception:
         body["description"] = ""
     body["title"] = get_title(html)
     body["spacetime"] = get_spacetime(html)
     body["content"] = html["content_p"]
     return body
-    
+
     """
     body = json.load(codecs.open(file_name, "r", "utf-8"))
     html = body["content"]
@@ -72,10 +74,12 @@ def deal_json(file_name):
     return body
     """
 
+
 def index_ebola(es, file_id):
     global FILE_TEMPLATE
     file_name = FILE_TEMPLATE.format(file_id)
-    es.index(index="trec3", body=deal_json(file_name), doc_type="ebola", id=file_id)
+    es.index(
+        index="trec3", body=deal_json(file_name), doc_type="ebola", id=file_id)
 
 
 def index_thread(thread_id, thread_count, file_count=194481):
@@ -90,38 +94,12 @@ def index_thread(thread_id, thread_count, file_count=194481):
             logging.exception("[!] index ebola exception: %s", e)
         file_id += thread_count
 
-def usage():
-    print """Usage:
-        python import_ebola.py test [file_count]
-        python import_ebola.py process <process_id> <process_count>
-        python import_ebola.py thread <thread_count>"""
-
-def main():
-    logging.root.setLevel(logging.WARNING)
-    if len(sys.argv) == 1:
-        return usage()
-    option = sys.argv[1]
-    if option == "process":
-        process_id = int(sys.argv[2])
-        process_count = int(sys.argv[3])
-        index_thread(process_id, process_count)
-    elif option == "test":
-        if len(sys.argv) == 3:
-            index_thread(0, 1, int(sys.argv[2]))
-        else:
-            index_thread(0, 1, 300)
-    elif option == "thread":
-        thread_count = int(sys.argv[2])
-        for thread in [threading.Thread(target=index_thread, args=(i, thread_count)) for i in range(thread_count)]:
-            thread.start()
-    else:
-        usage()
 
 if __name__ == "__main__":
-    main()
-    
-
-
-
-
+    mp.multi_main(
+        target=index_thread,
+        test_target=mp.partial(
+            index_thread, thread_id=0, thread_count=1, file_count=281
+        )
+    )
 
