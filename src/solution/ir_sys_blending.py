@@ -90,8 +90,8 @@ class IRSys(object):
                         [d[SCORE],],
                         d,
                     ]
-
         return sorted(doc_score_dict.items(), reverse=True, key=lambda v:v[1][0])[0:ret_cnt]
+
 
 
     #返回格式，三元组(随便什么，docno, score),输入iterms

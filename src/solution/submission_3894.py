@@ -39,7 +39,7 @@ def submission_xQuAD_rocchio_tfidfw_solution():
     # ]
     xquad_lmd = 0.8
     multi_xquad_lmd = [0.6, xquad_lmd]
-    source_weight = [0.1, 0.9]
+    source_weight = [0.1, 0.9] #实际是0.1 0.1
     tot_itr_times = 10
 
     use_jig_feedback_cnt_limit = 2

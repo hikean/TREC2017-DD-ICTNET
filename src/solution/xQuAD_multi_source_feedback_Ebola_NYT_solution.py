@@ -462,9 +462,9 @@ def xQuAD_Multi_source_Feedback_Ebola_NYT_fix_suggested_with_minus_feedback():
 
 if __name__ == '__main__':
     # xQuAD_Multi_source_Feedback_Ebola_NYT_fix_suggested()
-    # xQuAD_Multi_source_Feedback_Ebola_NYT_fix_suggested_ebolamulti_nytnot()
+    xQuAD_Multi_source_Feedback_Ebola_NYT_fix_suggested_ebolamulti_nytnot()
 
-    xQuAD_Multi_source_Feedback_Ebola_NYT_fix_suggested_with_minus_feedback()
+    # xQuAD_Multi_source_Feedback_Ebola_NYT_fix_suggested_with_minus_feedback()
 
 
 __END__ = True

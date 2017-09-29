@@ -78,6 +78,7 @@ def xQuAD_feedback_google_Ebola_NYT():
     # TODO: 这里有一些策略来过滤
     # ebola_suggestor = SubQueryGenerator_V1(js_file=GOOGLE_SUGGESTED_V1_EBOLA)
     # nyt_suggestor = SubQueryGenerator_V1(js_file=GOOGLE_SUGGESTED_V1_NYT)
+    # GOOGLE_SUGGESTED = ""
     suggestor = SubQueryGenerator(js_file=GOOGLE_SUGGESTED)
 
     logging.info("initing jig")  # EBOLA_NYT_JIG_DIR

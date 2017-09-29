@@ -45,9 +45,6 @@ def nyt_seg_LMD(topic_id , query ):
             print "None"
 
 
-
-
-
 def base_nyt_seg_data():
     # NYT_TOPICS = [
     #     ('dd17-2', 'Who Outed Valerie Plame?'),
@@ -232,23 +229,7 @@ def brew_nyt_params():
 
 if __name__ == '__main__':
 
-    try:
-        urls = [
-            'http://172.22.0.11:8983/solr/nyt_lmd2500/select?',
-            'http://172.22.0.11:8983/solr/nyt_lmd3000/select?',
-            'http://172.22.0.11:8983/solr/nyt_lmd3500/select?'
-        ]
-        import sys
-        index = int(sys.argv[1])
-        global SOLR_SEG_nyt_LMD768_URL
-        SOLR_SEG_nyt_LMD768_URL = urls[index]
-        print SOLR_SEG_nyt_LMD768_URL
-        logging.root.setLevel(logging.WARNING)
-    except Exception as e:
-        logging.exception("[!] Exception: %s", e)
-
     base_nyt_seg_data()
-
     # nyt_irsys_blending()
     # base_nyt_full_data()
     # nyt_irsys_blending_sep()
