@@ -45,7 +45,7 @@ def submission_xQuAD_rocchio_tfidfw_solution():
     use_jig_feedback_cnt_limit = 2
     query_expansion_feedback_cnt_limit = 1
     candidate_doc_cnt = 30
-    every_expand_words_cnt = 5
+    every_expand_words_cnt = 6
     if_use_stop_stop_strategy = False
 
 

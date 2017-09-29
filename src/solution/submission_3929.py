@@ -1,29 +1,14 @@
 # -*- coding: utf-8 -*-
 # @author: Weimin Zhang (weiminzhang199205@163.com)
-# @date: 17/9/28 下午8:48
+# @date: 17/9/28 下午9:50
 # @version: 1.0
-
-'''
-算法：
-1、xQuAD
-2、rocchio做查询反馈
-
-tricks:
-1、如果发现文档的相同文档不是on-topic的 就不返回给jig
-2、只考虑candidate 30
-3、变化对待D,
-
-===
-可以试试的是把权重改成0-1或者出现次数
-这个做两个Solution
-'''
-
 
 
 from xQuAD_multi_source_feedback import *
+from xQuAD_with_feedback_tc_algorithms import *
 
 
-def submission_xQuAD_rocchio_tfidfw_solution():
+def submission_xQuAD_rocchio_tc_solution():
     # EBOLA_TOPICS = [
     #     # ('DD16-1', 'US Military Crisis Response'),
     #     # ('DD16-3', 'healthcare impacts of ebola'),
@@ -37,7 +22,7 @@ def submission_xQuAD_rocchio_tfidfw_solution():
     #     # ('dd17-2', 'Who Outed Valerie Plame?'),
     #     # ('dd17-46', 'PGP'),
     # ]
-    xquad_lmd = 0.8
+    xquad_lmd = 0.7
     multi_xquad_lmd = [0.6, xquad_lmd]
     source_weight = [0, 1.0]
     tot_itr_times = 10
@@ -45,9 +30,8 @@ def submission_xQuAD_rocchio_tfidfw_solution():
     use_jig_feedback_cnt_limit = 2
     query_expansion_feedback_cnt_limit = 1
     candidate_doc_cnt = 30
-    every_expand_words_cnt = 5
-    if_use_stop_stop_strategy = False
-
+    every_expand_words_cnt = 6
+    if_use_stop_stop_strategy = True
 
     print "candidate_doc_cnt:", candidate_doc_cnt
     print "use_jig_feedback_cnt_limit:", use_jig_feedback_cnt_limit
@@ -87,7 +71,7 @@ def submission_xQuAD_rocchio_tfidfw_solution():
     jig = JigClient(tot_itr_times=tot_itr_times, base_jig_dir=EBOLA_NYT_JIG_DIR)
 
     logging.info("ebola ...")
-    xQuAD_multisource_with_feedback(topics=EBOLA_TOPICS,
+    xQuAD_multisource_with_feedback_tc(topics=EBOLA_TOPICS,
                                     suggestor=suggestor,
                                     if_use_clean_text=True,
                                     boost_params=1,
@@ -113,7 +97,7 @@ def submission_xQuAD_rocchio_tfidfw_solution():
                                     )
 
     logging.info("nyt...")
-    xQuAD_with_feedback_del_dup_dynamic_D(topics=NYT_TOPICS,
+    xQuAD_with_feedback_del_dup_dynamic_D_tc(topics=NYT_TOPICS,
                                                                           suggestor=suggestor,
                                                                           if_use_clean_text=True,
                                                                           boost_params=1,
@@ -140,6 +124,6 @@ def submission_xQuAD_rocchio_tfidfw_solution():
 
 
 if __name__ == '__main__':
-    submission_xQuAD_rocchio_tfidfw_solution()
+    submission_xQuAD_rocchio_tc_solution()
 
 __END__ = True

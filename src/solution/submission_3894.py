@@ -39,14 +39,14 @@ def submission_xQuAD_rocchio_tfidfw_solution():
     # ]
     xquad_lmd = 0.8
     multi_xquad_lmd = [0.6, xquad_lmd]
-    source_weight = [0, 1.0]
+    source_weight = [0.1, 0.9]
     tot_itr_times = 10
 
     use_jig_feedback_cnt_limit = 2
     query_expansion_feedback_cnt_limit = 1
     candidate_doc_cnt = 30
     every_expand_words_cnt = 5
-    if_use_stop_stop_strategy = False
+    if_use_stop_stop_strategy = True
 
 
     print "candidate_doc_cnt:", candidate_doc_cnt
